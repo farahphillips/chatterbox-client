@@ -98,14 +98,13 @@ describe('chatterbox', function() {
       it('should add a friend upon clicking their username', function(){
         sinon.spy(app, 'addFriend');
 
+        app.init();
+
         app.addMessage({
           username: 'Mel Brooks',
           text: 'I didn\'t get a harumph outa that guy.!',
           roomname: 'lobby'
         });
-
-        app.init();
-
         $('#main').find('.username').trigger('click');
         expect(app.addFriend.called).to.be.true;
 
@@ -113,16 +112,16 @@ describe('chatterbox', function() {
       });
 
       it('should try to send a message upon clicking submit', function(){
-        sinon.spy(app, 'handleSubmit');
-
-        $('#message').val('Why so many Mel Brooks quotes?');
-
+        sinon.spy(app, 'submitMessage');
         app.init();
+        //debugger;
+        $('#msgInput').val('Why so many Mel Brooks quotes?');
 
-        $('#send .submit').trigger('submit');
-        expect(app.handleSubmit.calledOnce).to.be.true;
 
-        app.handleSubmit.restore();
+        $('#msgSubmitBtn').trigger('submit');
+        expect(app.submitMessage.calledOnce).to.be.true;
+
+        app.submitMessage.restore();
       });
     });
   });

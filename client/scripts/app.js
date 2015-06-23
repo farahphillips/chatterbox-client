@@ -59,12 +59,6 @@ app.displayMessages = function(roomname) {
       }
     }
   }
-
-  $(".username").on("click", function() {
-    if(app.friends.indexOf($(this).text())===-1) {
-      app.addFriend($(this).text());
-    }
-  })
 }
 
 app.addFriend = function(name) {
@@ -89,10 +83,16 @@ app.addMessage = function(message) {
   var username = $("<h4></h4>").addClass("username").text(message.username);
   var msg = $("<h5></h5>").text(message.text);
   div.append(username).append(msg);
+  username.on("click", function() {
+    if(app.friends.indexOf($(this).text())===-1) {
+      app.addFriend($(this).text());
+    }
+  })
   $("#chats").append(div);
 }
 
 app.submitMessage = function() {
+  console.log("submitMessage called");
   var formId = document.getElementById("userInput").value;
   var formMsg = document.getElementById("msgInput").value;
   var formRoom = document.getElementById("roomSelect").value;
