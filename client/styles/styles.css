@@ -95,9 +95,15 @@ form input[type=text] {
   padding-bottom: 5px;
 }
 
-h4, h5 {
+h4, h5{
   margin: 5px;
   padding: 0px;
+  font-family: helvetica;
+  font-size: 18px;
+}
+
+h5{
+  font-size: 14px;
 }
 
 select {

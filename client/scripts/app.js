@@ -41,11 +41,20 @@ app.fetch = function() {
 
 }
 
-app.displayMessages = function() {
+app.displayMessages = function(roomname) {
   this.clearMessages();
-  for (var i = 0; i < messages.length; i++) {
-    if(messages[i].username) {
-      app.addMessage(messages[i]);
+
+  if (roomname) {
+    for (var i = 0; i < messages.length; i++) {
+      if (messages[i].roomname === "roomname") {
+        app.addMessage(messages[i]);
+      }
+    }
+  } else {
+    for (var i = 0; i < messages.length; i++) {
+      if(messages[i].username) {
+        app.addMessage(messages[i]);
+      }
     }
   }
 }
@@ -82,13 +91,13 @@ app.submitMessage = function() {
     contentType: 'application/json',
     success: function (data) {
       console.log('chatterbox: Message sent');
+      app.fetch();
     },
     error: function (data) {
       console.error('chatterbox: Failed to send message');
     }
   });
 
-  this.fetch();
 }
 
 app.addRoom = function(roomname) {
