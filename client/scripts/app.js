@@ -2,6 +2,8 @@ var app = {},
     messages;
 
 app.init = function() {
+  app.rooms = [];
+  app.friends = [];
   this.server = 'https://api.parse.com/1/classes/chatterbox';
   this.fetch();
 };
@@ -46,7 +48,7 @@ app.displayMessages = function(roomname) {
 
   if (roomname) {
     for (var i = 0; i < messages.length; i++) {
-      if (messages[i].roomname === "roomname") {
+      if (messages[i].roomname === roomname) {
         app.addMessage(messages[i]);
       }
     }
@@ -57,6 +59,23 @@ app.displayMessages = function(roomname) {
       }
     }
   }
+
+  $(".username").on("click", function() {
+    if(app.friends.indexOf($(this).text())===-1) {
+      app.addFriend($(this).text());
+    }
+  })
+}
+
+app.addFriend = function(name) {
+  this.friends.push(name);
+  var newFriend = $("<h4></h4>").text(name);
+  $("#friendsContainer").append(newFriend);
+  $(".username").each(function() {
+    if($(this).text() === name) {
+      $(this).css("color", "green")
+    }
+  });
 }
 
 app.clearMessages = function() {
@@ -67,7 +86,7 @@ app.clearMessages = function() {
 app.addMessage = function(message) {
   var div = $("<div></div>")
   div.addClass("message");
-  var username = $("<h4></h4>").text(message.username);
+  var username = $("<h4></h4>").addClass("username").text(message.username);
   var msg = $("<h5></h5>").text(message.text);
   div.append(username).append(msg);
   $("#chats").append(div);
@@ -76,7 +95,7 @@ app.addMessage = function(message) {
 app.submitMessage = function() {
   var formId = document.getElementById("userInput").value;
   var formMsg = document.getElementById("msgInput").value;
-  var formRoom = $("#roomSelect")[0].value;
+  var formRoom = document.getElementById("roomSelect").value;
 
   var message = {
     username: formId,
@@ -98,6 +117,8 @@ app.submitMessage = function() {
     }
   });
 
+  document.getElementById("userInput").value = "";
+  document.getElementById("msgInput").value = "";
 }
 
 app.addRoom = function(roomname) {
@@ -118,10 +139,22 @@ $(document).ready(function() {
     app.clearMessages();
   });
 
-  $("#submitBtn").click(function(e) {
+  $("#msgSubmitBtn").click(function(e) {
     e.preventDefault();
 
     app.submitMessage();
+  })
+
+  $("#roomSubmitBtn").click(function(e) {
+    e.preventDefault();
+    var roomname = document.getElementById("roomInput").value;
+    app.addRoom(roomname);
+    document.getElementById("roomInput").value = "";
+  })
+
+  $("#roomSelect").on("change", function() {
+    var roomname = document.getElementById("roomSelect").value;
+    app.displayMessages(roomname);
   })
 
   app.init();

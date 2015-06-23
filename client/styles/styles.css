@@ -10,8 +10,8 @@ body {
 }
 
 #roomSelectContainer {
-    float: right;
-}
+/*    float: right;
+*/}
 
 #main {
     width: 500px;
@@ -126,3 +126,13 @@ button {
 #msgInput {
     width: 350px;
 }
+
+#friendsContainer {
+    float: left;
+}
+
+
+
+
+
+
