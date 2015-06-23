@@ -118,6 +118,12 @@ $(document).ready(function() {
     app.clearMessages();
   });
 
+  $("#submitBtn").click(function(e) {
+    e.preventDefault();
+
+    app.submitMessage();
+  })
+
   app.init();
 
 });
