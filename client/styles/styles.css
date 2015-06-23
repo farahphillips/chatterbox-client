@@ -18,12 +18,13 @@ body {
     margin: auto;
     text-align: left;
     background: white;
-    padding: 50px 60px;
+    padding: 10px 60px;
     border: solid #ddd;
     border-width: 0 1px 1px 1px;
 }
 
-#main h1 {
+#main > h1 {
+    text-align: center;
     margin-top: 0;
     font-size: 35px;
     margin-bottom: 5px;
@@ -122,6 +123,6 @@ button {
 
 }
 
-#msgInputBox {
+#msgInput {
     width: 350px;
 }
