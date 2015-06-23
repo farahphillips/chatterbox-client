@@ -1,5 +1,5 @@
 var app = {},
-    messages;
+    messages = [];
 
 app.init = function() {
   app.rooms = [];
@@ -33,14 +33,43 @@ app.fetch = function() {
     success: function (data) {
       console.log('chatterbox: Messages received');
       messages = obj.responseJSON.results;
-      app.displayMessages();
+     // debugger;
+      app.loadRoomsArray();
+      app.refreshRoomsDropdown();
+      var roomname = document.getElementById("roomSelect").value;
+      if(roomname) {
+        app.displayMessages(roomname);
+      } else {
+        app.displayMessages();
+      }
     },
     error: function (data) {
       // See: https://developer.mozilla.org/en-US/docs/Web/API/console.error
       console.error('chatterbox: Failed to receive messages');
     }
   })
+}
 
+app.loadRoomsArray = function() {
+  for(var i=0; i<messages.length; i++) {
+    if(messages[i].roomname && app.rooms.indexOf(messages[i].roomname)===-1) {
+      app.rooms.push(messages[i].roomname);
+    }
+  }
+}
+
+app.refreshRoomsDropdown = function() {
+  var index = this.rooms.indexOf("lobby");
+  this.rooms.splice(index, 1);
+  this.rooms.unshift("lobby")
+
+  for(var i=0; i<this.rooms.length; i++) {
+    var roomname = this.rooms[i];
+    var matches = $("#roomSelect").find("option[value*='"+ roomname +"']");
+    if(matches.length === 0) {
+      this.addRoom(roomname);
+    }
+  }
 }
 
 app.displayMessages = function(roomname) {
@@ -122,10 +151,16 @@ app.submitMessage = function() {
 }
 
 app.addRoom = function(roomname) {
-  var newRoom = $("<option></option>");
+  if (roomname === "lobby") {
+    var newRoom = $("<option selected></option>");
+  } else {
+    var newRoom = $("<option></option>");
+  }
+
   newRoom.attr("value", roomname);
   newRoom.text(roomname);
   $("#roomSelect").append(newRoom);
+  app.displayMessages(roomname);
 }
 
 $(document).ready(function() {
