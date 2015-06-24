@@ -13,7 +13,7 @@
   </head>
   <body>
     <div id="friendsContainer">
-      <h2>Friends</h2>
+      <h1>friends</h1>
     </div>
 
     <div id="main">
@@ -24,7 +24,7 @@
         </select>
         <form id="createRoom">
           <input id="roomInput" type="text" name="roomname" value="" placeholder="or create a new room">
-          <button id="roomSubmitBtn">Submit</button>
+          <button id="roomSubmitBtn">submit</button>
         </form>
       </div>
 
@@ -32,14 +32,12 @@
         <form id="messageInput">
           <input id="userInput" type="text" name="username" value="" placeholder="Username">
           <input id="msgInput" type="text" name="message" value="" placeholder="Write a message.">
-          <button id="msgSubmitBtn">Submit Message</button>
+          <br>
+          <button id="msgSubmitBtn">send</button><button class="getMessages">retrieve</button><button class="wipeMessages">clear</button>
         </form>
       </div>
 
-      <button class="getMessages">retrieve</button>
-      <button class="wipeMessages">clear</button>
       <div id="chats"></div>
     </div>
-
   </body>
 </html>

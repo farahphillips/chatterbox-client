@@ -1,5 +1,5 @@
 body {
-    background: black;
+    background: rgba(0, 0, 0, .1);
     text-align: center;
     padding: 0 25px;
     font-family: helvetica, sans-serif;
@@ -10,7 +10,7 @@ body {
     width: 500px;
 }
 
-#main {
+#main, #friendsContainer {
     width: 500px;
     margin: auto;
     text-align: left;
@@ -20,12 +20,23 @@ body {
     border-width: 0 1px 1px 1px;
 }
 
-#main > h1 {
+#friendsContainer {
+    float: left;
+    padding: 10px 0px;
+    height: 500px;
+    width: 300px;
+    max-width: 300px;
+}
+
+
+h1 {
     text-align: center;
     margin-top: 0;
     font-size: 35px;
     margin-bottom: 5px;
     padding: 5px;
+    color: rgba(0, 0, 0, .5);
+    font-weight: 200;
 }
 
 #main h1 span {
@@ -84,6 +95,7 @@ h5{
 
 input {
   border: 1px solid rgba(0, 0, 0, .1);
+  border-radius: 5px;
 }
 
 button {
@@ -96,17 +108,3 @@ button {
 #msgInput {
     width: 350px;
 }
-
-#friendsContainer {
-    float: left;
-    height: 500px;
-    width: 300px;
-    max-width: 300px;
-    background-color: white;
-}
-
-
-
-
-
-
